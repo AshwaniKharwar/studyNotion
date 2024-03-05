@@ -45,7 +45,7 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
         if(!orderResponse.data.success) {
             throw new Error(orderResponse.data.message);
         }
-        console.log("PRINTING orderResponse", orderResponse);
+        // console.log("PRINTING orderResponse", orderResponse);
         //options
         const options = {
             key: process.env.RAZORPAY_KEY,
@@ -101,7 +101,7 @@ async function sendPaymentSuccessEmail(response, amount, token) {
 async function verifyPayment(bodyData, token, navigate, dispatch) {
     const toastId = toast.loading("Verifying Payment....");
     dispatch(setPaymentLoading(true));
-    console.log("VERIFY PAYMENT BODYDATA: ",bodyData);
+    // console.log("VERIFY PAYMENT BODYDATA: ",bodyData);
     try{
         const response  = await apiConnector("POST", COURSE_VERIFY_API, bodyData, {
             Authorization:`Bearer ${token}`,

@@ -87,11 +87,11 @@ exports.capturePayment = async (req, res) => {
     currency: "INR",
     receipt: Math.random(Date.now()).toString(),
   };
- console.log("OPTIONS : ", options)
+//  console.log("OPTIONS : ", options)
   try {
     // Initiate the payment using Razorpay
     const paymentResponse = await instance.orders.create(options);
-    console.log(paymentResponse);
+    // console.log(paymentResponse);
     res.json({
       success: true,
       data: paymentResponse,
@@ -132,7 +132,7 @@ exports.verifyPayment = async (req, res) => {
 
   if (expectedSignature === razorpay_signature) {
     await enrollStudents(courses, userId, res);
-    console.log("Payment Successfull...")
+    // console.log("Payment Successfull...")
     return res.status(200).json({ success: true, message: "Payment Verified" });
   }
 
@@ -195,7 +195,7 @@ const enrollStudents = async (courses, userId, res) => {
           .status(500)
           .json({ success: false, error: "Course not found" });
       }
-      console.log("Updated course: ", enrolledCourse);
+      // console.log("Updated course: ", enrolledCourse);
 
       const courseProgress = await CourseProgress.create({
         courseID: courseId,
@@ -214,7 +214,7 @@ const enrollStudents = async (courses, userId, res) => {
         { new: true }
       );
 
-      console.log("Enrolled student: ", enrolledStudent);
+      // console.log("Enrolled student: ", enrolledStudent);
       // Send an email notification to the enrolled student
       const emailResponse = await mailSender(
         enrolledStudent.email,
@@ -225,7 +225,7 @@ const enrollStudents = async (courses, userId, res) => {
         )
       );
 
-      console.log("Email sent successfully: ", emailResponse.response);
+      // console.log("Email sent successfully: ", emailResponse.response);
     } catch (error) {
       console.log(error);
       return res.status(400).json({ success: false, error: error.message });
